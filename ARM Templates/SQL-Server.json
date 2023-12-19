@@ -1,0 +1,59 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+  
+  "SQLLogin": {
+    
+    "type": "string",
+  "metadata": {
+   "description": " this is admin username"
+  }
+  },
+
+  "SQLPassword": {
+    "type": "secureString",
+    "metadata": {
+        "description": "this is admin password"
+    }
+  }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+
+
+        {
+  "type": "Microsoft.Sql/servers",
+  "apiVersion": "2022-05-01-preview",
+  "name": "dbserver8989",
+  "location": "[resourceGroup().location]",
+  "properties": {
+
+     "administratorLogin": "[parameters('SQLLogin')]", // to be configured as parameters
+    "administratorLoginPassword": "[parameters('SQLPassword')]"
+  }
+
+        },
+
+
+
+        {
+   "type": "Microsoft.Sql/servers/databases",
+   "apiVersion": "2022-05-01-preview",
+   "name": "TestDB",
+   "location": "[resourceGroup().location]",
+   "sku": {
+    "name":"basic",
+    "tier": "basic"
+
+   },
+   "properties":{},
+   "dependsOn":[
+     "[resourceId('Microsoft.Sql/servers', 'dbserver8989')]"
+   ]
+        }
+
+    ],
+    "outputs": {}
+}   
