@@ -1,0 +1,45 @@
+// this is a custom template for creating app service plan and app service on azure with ARM templates
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "functions": [],
+    "variables": {},
+    "resources": [
+{
+  "type": "Microsoft.Web/serverfarms",
+  "apiVersion": "2022-09-01",
+  "name": "plan7878ssahil",
+  "location": "[resourceGroup().location]",
+  "sku": {
+    "capabilities": [
+      {
+        "name": "F1",
+        "capacity": 1
+      }
+    ]
+    }
+},
+
+{
+  "type": "Microsoft.Web/sites",
+  "apiVersion": "2022-09-01",
+  "name": "testapp89891",
+  "location": "[resourceGroup().location]",
+  "properties": {
+  "serverFarmId": "[resourceId('Microsoft.Web/serverfarms','plan7878ssahil')]"
+
+
+  },
+  "dependsOn" : [
+"[resourceId('Microsoft.Web/serverfarms','plan7878ssahil')]"
+
+  ]
+  }
+
+
+
+  ],
+    "outputs": {}
+}
