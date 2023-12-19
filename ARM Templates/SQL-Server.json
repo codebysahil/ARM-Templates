@@ -30,7 +30,7 @@
   "location": "[resourceGroup().location]",
   "properties": {
 
-     "administratorLogin": "[parameters('SQLLogin')]", // to be configured as parameters
+     "administratorLogin": "[parameters('SQLLogin')]", 
     "administratorLoginPassword": "[parameters('SQLPassword')]"
   }
 
